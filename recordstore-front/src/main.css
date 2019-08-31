@@ -33,7 +33,7 @@
 }
 
 .link-grey {
-  @apply text-gray-600;
+  @apply text-gray-600 underline;
 }
 
 .link-grey:hover {

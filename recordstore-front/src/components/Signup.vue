@@ -24,7 +24,7 @@
         <button type="submit" class="font-sans font-bold px-4 rounded cursor-pointer no-underline bg-green-500 hover:bg-green-600 block w-full py-4 text-white items-center justify-center">Sign Up</button>
 
         <div class="my-4">
-          <router-link to="/" class="link">Sign In</router-link>
+          <router-link to="/" class="link-grey">Sign In</router-link>
         </div>
 
       </form>
@@ -50,14 +50,14 @@ export default {
     this.checkSignedIn()
   },
   methods: {
-    signin () {
+    signup () {
       this.$http.plain.post('/signup', { email: this.email, password: this.password, password_confirmation: this.password_confirmation })
-        .then(response => this.signinSuccesful(response))
-        .catch(error => this.signinFailed(error))
+        .then(response => this.signupSuccesful(response))
+        .catch(error => this.signupFailed(error))
     },
-    signinSuccesful (response) {
+    signupSuccesful (response) {
       if (!response.data.csrf) {
-        this.signinFailed(response)
+        this.signupFailed(response)
         return
       }
 
@@ -66,7 +66,7 @@ export default {
       this.error = ''
       this.$router.replace('/records')
     },
-    signinFailed (error) {
+    signupFailed (error) {
       this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong...'
       delete localStorage.csrf
       delete localStorage.signedIn
