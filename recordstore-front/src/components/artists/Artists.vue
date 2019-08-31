@@ -28,7 +28,7 @@
 
           <button class="bg-transparent text-sm hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 no-underline font-bold py-2 px-4 mr-2 rounded" @click.prevent="editArtist(artist)">Edit</button>
 
-          <button class="bg-transparent text-sm hover:bg-red-500 text-red-500 hover:text-white no-underline font-bold py-2 px-4 rounded border-red-500" @click.prevent="removeArtist(artist)">Delete</button>
+          <button class="bg-transparent text-sm hover:bg-red-500 text-red-500 hover:text-white no-underline font-bold py-2 px-4 rounded border border-red-500" @click.prevent="removeArtist(artist)">Delete</button>
         </div>
 
         <div v-if="artist == editedArtist">
