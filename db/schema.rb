@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2019_08_24_130352) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "artists", force: :cascade do |t|
     t.string "name"
     t.string "string"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_artists_on_user_id"
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 2019_08_24_130352) do
   create_table "records", force: :cascade do |t|
     t.string "title"
     t.string "year"
-    t.integer "artist_id"
-    t.integer "user_id"
+    t.bigint "artist_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_records_on_artist_id"
@@ -39,4 +42,7 @@ ActiveRecord::Schema.define(version: 2019_08_24_130352) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "artists", "users"
+  add_foreign_key "records", "artists"
+  add_foreign_key "records", "users"
 end
