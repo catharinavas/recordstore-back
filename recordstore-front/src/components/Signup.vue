@@ -64,6 +64,7 @@ export default {
       localStorage.csrf = response.data.csrf
       localStorage.signedIn = true
       this.error = ''
+      this.$bus.$emit('logged', 'User logged')
       this.$router.replace('/records')
     },
     signupFailed (error) {
@@ -73,6 +74,7 @@ export default {
     },
     checkSignedIn () {
       if (localStorage.signedIn) {
+        this.$bus.$emit('logged', 'User logged')
         this.$router.replace('/records')
       }
     }

@@ -6,7 +6,7 @@
 
         <a href="/" class="uppercase font-mono pl-4 font-semibold no-underline text-indigo-600 hover:text-indigo-800"><span class="inline-block align-middle">Record Store</span></a>
       </div>
-      <div>
+      <div :key="isLogged">
         <router-link to="/" class="link-grey px-2 no-underline" v-if="!signedIn()">Sign in</router-link>
         <router-link to="/signup" class="link-grey px-2 no-underline" v-if="!signedIn()">Sign Up</router-link>
         <router-link to="/records" class="link-grey px-2 no-underline" v-if="signedIn()">Records</router-link>
@@ -20,8 +20,15 @@
 <script >
 export default {
   name: 'Header',
+  data () {
+    return {
+      isLogged: this.signedIn()
+    }
+  },
   created () {
-    this.signedIn()
+    this.$bus.$on('logged', () => {
+      this.isLogged = this.signedIn()
+    })
   },
   methods: {
     setError (error, text) {
@@ -35,6 +42,7 @@ export default {
         .then(response => {
           delete localStorage.csrf
           delete localStorage.signedIn
+          this.isLogged = this.signedIn()
           this.$router.replace('/')
         })
         .catch(error => this.setError(error, 'Cannot sign out'))
