@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :key="isLogged"/>
+    <Header/>
     <router-view/>
   </div>
 </template>
