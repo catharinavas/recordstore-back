@@ -20,8 +20,16 @@
 <script >
 export default {
   name: 'Header',
+  data () {
+    return {
+      isLogged: this.signedIn()
+    }
+  },
   created () {
-    this.signedIn()
+    // this.signedIn()
+    this.$bus.$on('logged', () => {
+      this.isLogged = this.signedIn()
+    })
   },
   methods: {
     setError (error, text) {
@@ -35,6 +43,7 @@ export default {
         .then(response => {
           delete localStorage.csrf
           delete localStorage.signedIn
+          this.isLogged = this.signedIn()
           this.$router.replace('/')
         })
         .catch(error => this.setError(error, 'Cannot sign out'))
