@@ -3,7 +3,7 @@ import axios from 'axios'
 const API_URL = 'http://localhost:3000'
 
 const securedAxiosInstance = axios.create({
-  baseURL: process.env.baseURL || API_URL,
+  baseURL: process.env.PORT || API_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
